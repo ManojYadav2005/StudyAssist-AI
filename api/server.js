@@ -111,7 +111,7 @@ function normalizeStudyDeck(obj) {
   };
 }
 
-app.post('/api/completion', async (req, res) => {
+app.post(['/api/completion', '/completion'], async (req, res) => {
   const { prompt, mode, existingDeck, refinementPrompt } = req.body;
 
   if (!prompt && !refinementPrompt) {
@@ -187,7 +187,7 @@ ${prompt}
     }
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 25000);
+    const timeout = setTimeout(() => controller.abort(), 45000);
 
     const response = await fetch(requestUrl, {
       method: 'POST',

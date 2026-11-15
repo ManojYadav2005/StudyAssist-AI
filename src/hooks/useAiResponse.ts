@@ -52,12 +52,12 @@ export function useAiResponse(endpoint: string = '/api/completion') {
         lastPrompt: payload.prompt || payload.refinementPrompt || prev.lastPrompt,
       }));
 
-      // Set a client-side timeout of 22 seconds
+      // Client-side timeout of 45 seconds for LLMs with higher latency
       const timeoutId = setTimeout(() => {
         if (latestRequestIdRef.current === currentRequestId) {
           controller.abort();
         }
-      }, 22000);
+      }, 45000);
 
       try {
         const resp = await fetch(endpoint, {
